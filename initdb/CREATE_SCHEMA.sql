@@ -1,0 +1,2 @@
+CREATE SCHEMA IF NOT EXISTS action_plan;
+CREATE SCHEMA keycloak AUTHORIZATION postgres;

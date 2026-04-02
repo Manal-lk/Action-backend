@@ -1,0 +1,80 @@
+application:
+  name: @project.artifactId@
+
+info:
+  component: ACTION PLAN BACKEND
+
+server:
+  port: ${ACTION_PLAN_BACKEND_PORT:8081}
+
+jasypt:
+  encryptor:
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+    algorithm: PBEWithMD5AndDES
+
+spring:
+  application:
+    name: action-plan-backend
+
+  datasource:
+    url: ${ACTION_PLAN_BACKEND_DB_URL:jdbc:postgresql://localhost:5435/ACTION_PLAN_DB?currentSchema=action_plan}
+    username: ${ACTION_PLAN_BACKEND_DB_USERNAME:postgres}
+    password: ${ACTION_PLAN_BACKEND_DB_PASSWORD:ENC(LsjRbIBTeapIybeIkyTvfA==)}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 2
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    out-of-order: true
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
+management:
+  tracing:
+    enabled: true
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+logging:
+  level:
+    root: info
+    com.xelops.actionplan: debug
+    org.springframework.web: debug
+    org.springframework.security: debug
+
+keycloak:
+  base-url: ${KEYCLOAK_BASE_URL:http://localhost:8080}
+  realms:
+    - name: action-plan-public
+      issuer-uri: ${keycloak.base-url}/realms/${keycloak.realms[0].name}
+      jwk-set-uri: ${keycloak.realms[0].issuer-uri}/protocol/openid-connect/certs
+      clients:
+        - name: notification
+          client-id: ${ACTION_PLAN_PUBLIC_NOTIFICATION_OAUTH_CLIENT_ID:action-plan-platform.notification}
+          client-secret: ${ACTION_PLAN_PUBLIC_NOTIFICATION_OAUTH_CLIENT_SECRET:ENC(LsjRbIBTeapIybeIkyTvfA==)}
+    - name: action-plan-xelops
+      issuer-uri: ${keycloak.base-url}/realms/${keycloak.realms[1].name}
+      jwk-set-uri: ${keycloak.realms[1].issuer-uri}/protocol/openid-connect/certs
+      clients:
+        - name: notification
+          client-id: ${ACTION_PLAN_XELOPS_NOTIFICATION_OAUTH_CLIENT_ID:action-plan-platform.notification}
+          client-secret: ${ACTION_PLAN_XELOPS_NOTIFICATION_OAUTH_CLIENT_SECRET:mBrNZjnrIA2K6tnCytGgVruYsBQd5jxm}
+
+actionplan-platform:
+  scheduled-fetch-rate: 30000
+  url: ${ACTION_PLAN_PLATFORM_URL:http://localhost:3000}
+  notification:
+    hostname: ${ACTION_PLAN_NOTIFICATION_HOSTNAME:http://localhost:8082}
+
+storage:
+  type: LOCAL_FS
+  local:
+    root-dir: ${ACTION_PLAN_STORAGE_ROOT:/var/actions/storage}
