@@ -74,26 +74,26 @@ public class ActionResource {
     }
 
     @Operation(
-                summary = "Delete an action",
-                description = "Delete an action",
-                security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
-                responses = {
-                        @ApiResponse(
-                                description = "Successful Operation",
-                                responseCode = "200"
-                        ),
-                        @ApiResponse(
-                                description = "Bad Request",
-                                responseCode = "400"
-                        ),
-                        @ApiResponse(description = "Unexpected Error", responseCode = "500")
-                }
-        )
-        @RolesAllowed({UserRoleEnum.Fields.SIMPLE_USER, UserRoleEnum.Fields.ADMIN})
-        @DeleteMapping("/boards/{boardId}/actions/{actionId}")
-        @ActionPlanPlatformLogger(module = ModuleEnum.ACTION)
-        public void deleteAction(@PathVariable Long boardId, @PathVariable Long actionId) throws NotFoundException {
-            actionService.deleteAction(boardId, actionId);
+            summary = "Delete an action",
+            description = "Delete an action",
+            security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
+            responses = {
+                    @ApiResponse(
+                            description = "Successful Operation",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "Bad Request",
+                            responseCode = "400"
+                    ),
+                    @ApiResponse(description = "Unexpected Error", responseCode = "500")
+            }
+    )
+    @RolesAllowed({UserRoleEnum.Fields.SIMPLE_USER, UserRoleEnum.Fields.ADMIN})
+    @DeleteMapping("/boards/{boardId}/actions/{actionId}")
+    @ActionPlanPlatformLogger(module = ModuleEnum.ACTION)
+    public void deleteAction(@PathVariable Long boardId, @PathVariable Long actionId) throws NotFoundException {
+        actionService.deleteAction(boardId, actionId);
     }
 
     @Operation(
@@ -151,14 +151,14 @@ public class ActionResource {
     }
 
     @Operation(
-        summary = "Get action statistics",
-        description = "Get statistics for actions (total, completedRate, overdue, completion rate)",
-        security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
-        responses = {
-            @ApiResponse(description = "Successful Operation", responseCode = "200"),
-            @ApiResponse(description = "Bad Request", responseCode = "400"),
-            @ApiResponse(description = "Unexpected Error", responseCode = "500")
-        }
+            summary = "Get action statistics",
+            description = "Get statistics for actions (total, completedRate, overdue, completion rate)",
+            security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
+            responses = {
+                    @ApiResponse(description = "Successful Operation", responseCode = "200"),
+                    @ApiResponse(description = "Bad Request", responseCode = "400"),
+                    @ApiResponse(description = "Unexpected Error", responseCode = "500")
+            }
     )
     @RolesAllowed({UserRoleEnum.Fields.SIMPLE_USER, UserRoleEnum.Fields.ADMIN})
     @GetMapping("/actions/statistics-overview")
@@ -168,14 +168,14 @@ public class ActionResource {
     }
 
     @Operation(
-        summary = "Get action status breakdown",
-        description = "Get breakdown of action statuses (in progress, completedRate, to do, blocked rate)",
-        security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
-        responses = {
-            @ApiResponse(description = "Successful Operation", responseCode = "200"),
-            @ApiResponse(description = "Bad Request", responseCode = "400"),
-            @ApiResponse(description = "Unexpected Error", responseCode = "500")
-        }
+            summary = "Get action status breakdown",
+            description = "Get breakdown of action statuses (in progress, completedRate, to do, blocked rate)",
+            security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
+            responses = {
+                    @ApiResponse(description = "Successful Operation", responseCode = "200"),
+                    @ApiResponse(description = "Bad Request", responseCode = "400"),
+                    @ApiResponse(description = "Unexpected Error", responseCode = "500")
+            }
     )
     @RolesAllowed({UserRoleEnum.Fields.SIMPLE_USER, UserRoleEnum.Fields.ADMIN})
     @GetMapping("/actions/status-breakdown")
@@ -185,14 +185,14 @@ public class ActionResource {
     }
 
     @Operation(
-        summary = "Get overdue actions breakdown",
-        description = "Get breakdown of overdue actions by delay duration (1-3, 4-7, 8-14, 15+ days)",
-        security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
-        responses = {
-            @ApiResponse(description = "Successful Operation", responseCode = "200", useReturnTypeSchema = true),
-            @ApiResponse(description = "Bad Request", responseCode = "400"),
-            @ApiResponse(description = "Unexpected Error", responseCode = "500")
-        }
+            summary = "Get overdue actions breakdown",
+            description = "Get breakdown of overdue actions by delay duration (1-3, 4-7, 8-14, 15+ days)",
+            security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
+            responses = {
+                    @ApiResponse(description = "Successful Operation", responseCode = "200", useReturnTypeSchema = true),
+                    @ApiResponse(description = "Bad Request", responseCode = "400"),
+                    @ApiResponse(description = "Unexpected Error", responseCode = "500")
+            }
     )
     @RolesAllowed({UserRoleEnum.Fields.SIMPLE_USER, UserRoleEnum.Fields.ADMIN})
     @GetMapping("/actions/overdue-breakdown")
@@ -202,14 +202,14 @@ public class ActionResource {
     }
 
     @Operation(
-        summary = "Get average resolution time",
-        description = "Get the average resolution time (in days) for completedRate actions.",
-        security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
-        responses = {
-            @ApiResponse(description = "Successful Operation", responseCode = "200", useReturnTypeSchema = true),
-            @ApiResponse(description = "Bad Request", responseCode = "400"),
-            @ApiResponse(description = "Unexpected Error", responseCode = "500")
-        }
+            summary = "Get average resolution time",
+            description = "Get the average resolution time (in days) for completedRate actions.",
+            security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
+            responses = {
+                    @ApiResponse(description = "Successful Operation", responseCode = "200", useReturnTypeSchema = true),
+                    @ApiResponse(description = "Bad Request", responseCode = "400"),
+                    @ApiResponse(description = "Unexpected Error", responseCode = "500")
+            }
     )
     @RolesAllowed({UserRoleEnum.Fields.SIMPLE_USER, UserRoleEnum.Fields.ADMIN})
     @GetMapping("/actions/average-resolution-time")
@@ -219,14 +219,14 @@ public class ActionResource {
     }
 
     @Operation(
-        summary = "Get top assignees",
-        description = "Ranking list showing assignee name and number of completedRate actions. Identifies key contributors and workload distribution.",
-        security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
-        responses = {
-            @ApiResponse(description = "Successful Operation", responseCode = "200", useReturnTypeSchema = true),
-            @ApiResponse(description = "Bad Request", responseCode = "400"),
-            @ApiResponse(description = "Unexpected Error", responseCode = "500")
-        }
+            summary = "Get top assignees",
+            description = "Ranking list showing assignee name and number of completedRate actions. Identifies key contributors and workload distribution.",
+            security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
+            responses = {
+                    @ApiResponse(description = "Successful Operation", responseCode = "200", useReturnTypeSchema = true),
+                    @ApiResponse(description = "Bad Request", responseCode = "400"),
+                    @ApiResponse(description = "Unexpected Error", responseCode = "500")
+            }
     )
     @RolesAllowed({UserRoleEnum.Fields.SIMPLE_USER, UserRoleEnum.Fields.ADMIN})
     @GetMapping("/actions/top-assignees")
@@ -236,14 +236,14 @@ public class ActionResource {
     }
 
     @Operation(
-        summary = "Get upcoming deadlines",
-        description = "List of actions with upcoming due dates (next 7 days): Action Name and Days Remaining.",
-        security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
-        responses = {
-            @ApiResponse(description = "Successful Operation", responseCode = "200", useReturnTypeSchema = true),
-            @ApiResponse(description = "Bad Request", responseCode = "400"),
-            @ApiResponse(description = "Unexpected Error", responseCode = "500")
-        }
+            summary = "Get upcoming deadlines",
+            description = "List of actions with upcoming due dates (next 7 days): Action Name and Days Remaining.",
+            security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
+            responses = {
+                    @ApiResponse(description = "Successful Operation", responseCode = "200", useReturnTypeSchema = true),
+                    @ApiResponse(description = "Bad Request", responseCode = "400"),
+                    @ApiResponse(description = "Unexpected Error", responseCode = "500")
+            }
     )
     @RolesAllowed({UserRoleEnum.Fields.SIMPLE_USER, UserRoleEnum.Fields.ADMIN})
     @GetMapping("/actions/upcoming-deadlines")
@@ -253,14 +253,14 @@ public class ActionResource {
     }
 
     @Operation(
-        summary = "Get completion rate by priority",
-        description = "Pie chart showing completion rate per priority (High, Medium, Low)",
-        security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
-        responses = {
-            @ApiResponse(description = "Successful Operation", responseCode = "200", useReturnTypeSchema = true),
-            @ApiResponse(description = "Bad Request", responseCode = "400"),
-            @ApiResponse(description = "Unexpected Error", responseCode = "500")
-        }
+            summary = "Get completion rate by priority",
+            description = "Pie chart showing completion rate per priority (High, Medium, Low)",
+            security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
+            responses = {
+                    @ApiResponse(description = "Successful Operation", responseCode = "200", useReturnTypeSchema = true),
+                    @ApiResponse(description = "Bad Request", responseCode = "400"),
+                    @ApiResponse(description = "Unexpected Error", responseCode = "500")
+            }
     )
     @RolesAllowed({UserRoleEnum.Fields.SIMPLE_USER, UserRoleEnum.Fields.ADMIN})
     @GetMapping("/actions/completion-rate-by-priority")
@@ -270,14 +270,14 @@ public class ActionResource {
     }
 
     @Operation(
-        summary = "Get actions trend",
-        description = "Line chart displaying actions created and completedRate monthly.",
-        security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
-        responses = {
-            @ApiResponse(description = "Successful Operation", responseCode = "200", useReturnTypeSchema = true),
-            @ApiResponse(description = "Bad Request", responseCode = "400"),
-            @ApiResponse(description = "Unexpected Error", responseCode = "500")
-        }
+            summary = "Get actions trend",
+            description = "Line chart displaying actions created and completedRate monthly.",
+            security = @SecurityRequirement(name = GlobalConstants.SECURITY_SCHEME_NAME),
+            responses = {
+                    @ApiResponse(description = "Successful Operation", responseCode = "200", useReturnTypeSchema = true),
+                    @ApiResponse(description = "Bad Request", responseCode = "400"),
+                    @ApiResponse(description = "Unexpected Error", responseCode = "500")
+            }
     )
     @RolesAllowed({UserRoleEnum.Fields.SIMPLE_USER, UserRoleEnum.Fields.ADMIN})
     @GetMapping("/actions/trend")
@@ -357,7 +357,7 @@ public class ActionResource {
     @GetMapping("/boards/{boardId}/actions/{actionId}/history")
     @ActionPlanPlatformLogger(module = ModuleEnum.ACTION)
     public List<HistoryDto> getActionHistory(@PathVariable Long boardId,
-                                                    @PathVariable Long actionId
+                                             @PathVariable Long actionId
     ) throws NotFoundException {
         return actionService.getActionHistory(boardId, actionId);
     }

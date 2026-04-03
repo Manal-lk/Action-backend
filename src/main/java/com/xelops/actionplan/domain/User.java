@@ -16,12 +16,15 @@ import org.hibernate.type.SqlTypes;
 @NoArgsConstructor
 @SuperBuilder
 @AllArgsConstructor
-@Table(name = "\"user\"")
+
+@Table(name = "\"user\"", schema = "action_plan")
+
 public class User extends AuditTimestamps {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
     @SequenceGenerator(name = "user_id_seq", sequenceName = "user_id_seq", allocationSize = 1)
     private Long id;
+
 
     private String email;
 

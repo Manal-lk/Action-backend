@@ -17,7 +17,7 @@ spring:
     name: action-plan-backend
 
   datasource:
-    url: ${ACTION_PLAN_BACKEND_DB_URL:jdbc:postgresql://localhost:5435/ACTION_PLAN_DB?currentSchema=action_plan}
+    url: ${ACTION_PLAN_BACKEND_DB_URL:jdbc:postgresql://localhost:5432/ACTION_PLAN_DB?currentSchema=action_plan}
     username: ${ACTION_PLAN_BACKEND_DB_USERNAME:postgres}
     password: ${ACTION_PLAN_BACKEND_DB_PASSWORD:ENC(LsjRbIBTeapIybeIkyTvfA==)}
     driver-class-name: org.postgresql.Driver
